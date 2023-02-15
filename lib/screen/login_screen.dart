@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_room/screen/home_screen.dart';
 import 'package:lottie/lottie.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -21,15 +22,24 @@ class _LoginScreenState extends State<LoginScreen> {
           padding: const EdgeInsets.all(30),
           child: ListView(
             children: [
-              Center(child: Lottie.asset("assets/images/signin.json", height: screenSize.height * 0.3, fit: BoxFit.fitHeight)),
-              const SizedBox(height: 15,),
+              Center(
+                  child: Lottie.asset("assets/images/signin.json",
+                      height: screenSize.height * 0.3, fit: BoxFit.fitHeight)),
+              const SizedBox(
+                height: 15,
+              ),
               Center(
                 child: Text(
                   "به رستوران ما خوش آمدید.",
-                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold, color: Theme.of(context).primaryColor),
+                  style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).primaryColor),
                 ),
               ),
-              const SizedBox(height: 25,),
+              const SizedBox(
+                height: 25,
+              ),
               TextField(
                 keyboardType: TextInputType.emailAddress,
                 controller: emailController,
@@ -42,7 +52,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 //expands: true,
               ),
-              const SizedBox(height: 10,),
+              const SizedBox(
+                height: 10,
+              ),
               TextField(
                 keyboardType: TextInputType.text,
                 controller: passwordController,
@@ -56,16 +68,37 @@ class _LoginScreenState extends State<LoginScreen> {
                 //expands: true,
                 obscureText: true,
               ),
-              const SizedBox(height: 25,),
+              const SizedBox(
+                height: 25,
+              ),
               OutlinedButton(
-                  onPressed: () {
-                    emailController.text = "kondori.reza1990@gmail.com";
-                  },
+                onPressed: () {
+                  //emailController.text = "kondori.reza1990@gmail.com";
+                  if (emailController.text.isEmpty) {
+                    //خطای خالی بودن رایانامه
+                    print("Empty Email");
+                    return;
+                  } else if (passwordController.text.isEmpty) {
+                    //خطای خالی بودن کلمه عبور
+                    print("Empty Password");
+                    return;
+                  } else if (emailController.text == "admin@gmail.com" &&
+                      passwordController.text == "12345") {
+                    Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(builder: (context) => const HomeScreen()));
+                  } else {
+                    //خطای نامعتبر بودن
+                    print("Invalid");
+                    return;
+                  }
+                },
                 style: OutlinedButton.styleFrom(
-                    minimumSize: Size(screenSize.width - 60, 50),
-                  
+                  minimumSize: Size(screenSize.width - 60, 50),
                 ),
-                child: const Text("ورود به برنامه", style: TextStyle(fontSize: 20),),
+                child: const Text(
+                  "ورود به برنامه",
+                  style: TextStyle(fontSize: 20),
+                ),
               )
             ],
           ),

@@ -126,12 +126,14 @@ class MyApp extends StatelessWidget {
         : MessageItem('Sender $i', 'Message body $i'),
   );
 
+  HeadingItem item = HeadingItem('Heading');
+
   MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     const title = 'Mixed List';
-
+    item.printText();
     return MaterialApp(
       title: title,
       home: Scaffold(
@@ -164,10 +166,14 @@ abstract class ListItem {
 
   /// The subtitle line, if any, to show in a list item.
   Widget buildSubtitle(BuildContext context);
+
+  String printText() {
+    return "text";
+  }
 }
 
 /// A ListItem that contains data to display a heading.
-class HeadingItem implements ListItem {
+class HeadingItem extends ListItem {
   final String heading;
 
   HeadingItem(this.heading);
@@ -185,7 +191,7 @@ class HeadingItem implements ListItem {
 }
 
 /// A ListItem that contains data to display a message.
-class MessageItem implements ListItem {
+class MessageItem extends ListItem {
   final String sender;
   final String body;
 
