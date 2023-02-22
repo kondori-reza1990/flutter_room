@@ -41,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               "رستوران من",
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 45),
             ),
